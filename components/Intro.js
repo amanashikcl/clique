@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 
 const WORD = "CLIQUE";
@@ -10,13 +10,16 @@ export default function Intro({ onReveal, onDone }) {
   const root = useRef(null);
   const count = useRef(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const counter = { v: 0 };
       const tl = gsap.timeline({ onComplete: onDone });
 
-      tl.from(".intro-letter", {
-        yPercent: 110,
+      // Position letters below the mask and reveal them in the same frame, before first paint.
+      gsap.set(".intro-letter", { yPercent: 110, visibility: "visible" });
+
+      tl.to(".intro-letter", {
+        yPercent: 0,
         stagger: 0.06,
         duration: 0.9,
         ease: "power4.out",
