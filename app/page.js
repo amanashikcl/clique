@@ -8,6 +8,7 @@ import Marquee from "../components/Marquee";
 import Vision from "../components/Vision";
 import Nav from "../components/Nav";
 import WhatWeDo from "../components/WhatWeDo";
+import Partners from "../components/Partners";
 
 export default function Home() {
   const [introDone, setIntroDone] = useState(false);
@@ -25,6 +26,7 @@ export default function Home() {
         <Marquee />
         <Vision />
         <WhatWeDo />
+        <Partners />
       </main>
     </>
   );
